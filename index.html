@@ -3,388 +3,868 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Можно Поговорить — Онлайн-психолог</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Психолог Татьяна Стельмашенко — Онлайн-консультации</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Общие стили и переменные */
+        /* --- Переменные и базовые стили --- */
         :root {
-            --primary-pink: #fce4ec;
-            --accent-pink: #f06292;
-            --primary-blue: #e3f2fd;
-            --accent-blue: #4fc3f7;
-            --text-dark: #455a64;
-            --white: #ffffff;
-            --transition: all 0.3s ease;
+            --primary-color: #a6bfa5; /* Базовый цвет */
+            --accent-pink: #f5d6d3;   /* Теплый розовый оттенок */
+            --accent-blue: #dce7f0;   /* Мягкий голубой оттенок */
+            --text-dark: #2d342c;
+            --text-light: #ffffff;
+            --bg-light: #fcfcfb;
+            --shadow: 0 15px 35px rgba(0, 0, 0, 0.05);
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         html {
-            scroll-behavior: smooth;
+            scroll-behavior: smooth; /* Плавная прокрутка */
         }
 
         body {
             font-family: 'Montserrat', sans-serif;
-            line-height: 1.6;
             color: var(--text-dark);
-            background-color: #fafafa;
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        ul { list-style: none; }
-        a { text-decoration: none; color: inherit; }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
 
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
         section {
-            padding: 100px 0;
+            padding: 120px 0;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 15px 35px;
-            background-color: var(--accent-pink);
-            color: var(--white);
-            border-radius: 50px;
-            font-weight: 600;
-            transition: var(--transition);
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(240, 98, 146, 0.3);
-        }
-
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(240, 98, 146, 0.4);
-            background-color: #ec407a;
-        }
-
-        h2 {
+        .section-title {
             text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 50px;
+            font-size: 2.6rem;
+            margin-bottom: 60px;
             position: relative;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
 
-        h2::after {
+        .section-title::after {
             content: '';
             display: block;
-            width: 60px;
-            height: 4px;
-            background: var(--accent-blue);
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
             margin: 15px auto 0;
             border-radius: 2px;
         }
 
-        /* Навигация */
-        header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        /* --- Кнопки с современной анимацией --- */
+        .btn {
+            display: inline-block;
+            padding: 16px 38px;
+            background-color: var(--primary-color);
+            color: var(--text-dark);
+            font-weight: 600;
+            border-radius: 50px;
+            border: 2px solid transparent;
+            box-shadow: var(--shadow);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
         }
 
-        nav {
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(166, 191, 165, 0.4);
+            color: var(--text-dark);
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        /* --- Фиксированная навигация --- */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.02);
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 80px;
+            height: 90px;
         }
 
         .logo {
             font-weight: 700;
-            font-size: 1.5rem;
-            color: var(--accent-pink);
+            font-size: 1.3rem;
+            letter-spacing: -0.5px;
         }
 
-        .nav-links {
+        .logo span {
+            color: var(--primary-color);
+            font-weight: 400;
+        }
+
+        .nav-menu {
             display: flex;
-            gap: 30px;
+            gap: 35px;
         }
 
-        .nav-links a {
+        .nav-link {
             font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+            opacity: 0.8;
+        }
+
+        .nav-link:hover {
+            color: var(--text-dark);
+            opacity: 1;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
             transition: var(--transition);
         }
 
-        .nav-links a:hover {
-            color: var(--accent-blue);
+        .nav-link:hover::after {
+            width: 100%;
         }
 
-        /* Главный раздел (Hero) */
+        /* Кнопка мобильного меню */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 28px;
+            height: 2px;
+            background-color: var(--text-dark);
+            transition: var(--transition);
+        }
+
+        /* --- Главный раздел (Hero) --- */
         .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, var(--primary-pink) 0%, var(--primary-blue) 100%);
+            min-height: 100vh;
             display: flex;
             align-items: center;
+            background: linear-gradient(135deg, #fffcfc 0%, var(--accent-blue) 50%, var(--accent-pink) 100%);
+            padding-top: 100px;
+            position: relative;
+        }
+
+        /* Мягкие размытые круги на фоне */
+        .hero-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(90px);
+            z-index: 1;
+            opacity: 0.6;
+        }
+
+        .blob-1 {
+            width: 450px;
+            height: 450px;
+            background: var(--primary-color);
+            top: -100px;
+            right: -50px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
             text-align: center;
-            padding-top: 80px;
+            margin: 0 auto;
         }
 
-        .hero-content h1 {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-            color: #2c3e50;
+        .hero-subtitle {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            font-weight: 500;
+            opacity: 0.8;
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            margin-bottom: 40px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
+        .hero-title {
+            font-size: 3.8rem;
+            line-height: 1.25;
+            margin-bottom: 35px;
+            font-weight: 700;
+            letter-spacing: -1px;
         }
 
-        /* Обо мне */
-        .about-flex {
-            display: flex;
+        .hero-description {
+            font-size: 1.25rem;
+            margin-bottom: 45px;
+            color: #4a5249;
+            font-weight: 400;
+        }
+
+        /* --- Раздел "Обо мне" --- */
+        .about {
+            background-color: #ffffff;
+        }
+
+        .about-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
             align-items: center;
-            gap: 50px;
-            flex-wrap: wrap;
+        }
+
+        .about-image-container {
+            position: relative;
         }
 
         .about-image {
-            flex: 1;
-            min-width: 300px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 20px 20px 0 var(--primary-blue);
-        }
-
-        .about-image img {
             width: 100%;
+            max-width: 450px;
+            height: 550px;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 2;
             display: block;
+            margin: 0 auto;
+            transition: var(--transition);
         }
 
-        .about-text {
-            flex: 1;
-            min-width: 300px;
+        /* Декоративная рамка позади фото */
+        .about-image-container::after {
+            content: '';
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-40%);
+            width: 100%;
+            max-width: 450px;
+            height: 550px;
+            border: 2px solid var(--primary-color);
+            border-radius: 24px;
+            z-index: 1;
+            transition: var(--transition);
         }
 
-        /* Методы */
+        .about-image-container:hover .about-image {
+            transform: translateY(-10px);
+        }
+
+        .about-image-container:hover::after {
+            transform: translate(-35%, 10px);
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .about-text p {
+            margin-bottom: 22px;
+            color: #555e54;
+            font-size: 1.05rem;
+        }
+
+        .info-blocks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            padding: 24px;
+            background: var(--bg-light);
+            border-radius: 16px;
+            border-top: 4px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.01);
+        }
+
+        .info-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            font-size: 0.95rem;
+            margin-bottom: 0;
+            color: #666;
+        }
+
+        /* --- Раздел "Методы работы" --- */
+        .methods {
+            background-color: var(--bg-light);
+        }
+
         .methods-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
         }
 
         .method-card {
-            background: var(--white);
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
+            background-color: #ffffff;
+            padding: 45px 35px;
+            border-radius: 24px;
+            box-shadow: var(--shadow);
             transition: var(--transition);
-            border-bottom: 4px solid transparent;
+            border: 1px solid rgba(0,0,0,0.01);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(245,214,211,0.2), rgba(220,231,240,0.2));
+            opacity: 0;
+            transition: var(--transition);
         }
 
         .method-card:hover {
-            transform: translateY(-10px);
-            border-bottom: 4px solid var(--accent-blue);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: translateY(-12px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+        }
+
+        .method-card:hover::before {
+            opacity: 1;
         }
 
         .method-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            display: block;
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Тарифы */
+        /* Чередование цветов иконок */
+        .method-card:nth-child(1) .method-icon { background-color: var(--accent-pink); }
+        .method-card:nth-child(2) .method-icon { background-color: var(--accent-blue); }
+        .method-card:nth-child(3) .method-icon { background-color: var(--primary-color); }
+
+        .method-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+            position: relative;
+            z-index: 2;
+        }
+
+        .method-card p {
+            color: #555e54;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* --- Раздел "Тарифы" --- */
+        .pricing {
+            background-color: #ffffff;
+        }
+
         .pricing-grid {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
         .price-card {
-            background: var(--white);
-            padding: 50px 40px;
-            border-radius: 30px;
-            width: 350px;
+            background-color: var(--bg-light);
+            padding: 55px 45px;
+            border-radius: 28px;
             text-align: center;
-            border: 2px solid var(--primary-pink);
             transition: var(--transition);
+            position: relative;
+            border: 2px solid transparent;
         }
 
         .price-card.featured {
-            border-color: var(--accent-blue);
-            transform: scale(1.05);
+            border-color: var(--primary-color);
+            background-color: #ffffff;
+            box-shadow: 0 20px 50px rgba(166, 191, 165, 0.15);
         }
 
-        .price-val {
-            font-size: 2.5rem;
+        .price-card:hover {
+            transform: scale(1.02) translateY(-4px);
+        }
+
+        .pop-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-blue));
+            padding: 6px 20px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .price-title {
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .price-cost {
+            font-size: 2.8rem;
             font-weight: 700;
-            margin: 20px 0;
-            color: var(--accent-pink);
+            margin-bottom: 35px;
         }
 
-        /* Контакты */
-        .contact-content {
-            background: var(--primary-blue);
-            border-radius: 30px;
-            padding: 50px;
+        .price-cost span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #666;
+        }
+
+        .price-features {
+            text-align: left;
+            margin-bottom: 45px;
+        }
+
+        .price-features li {
+            margin-bottom: 15px;
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 30px;
+            align-items: flex-start;
+            gap: 12px;
+            font-size: 1rem;
+            color: #4a5249;
         }
 
-        .info-item {
+        .price-features li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* --- Раздел "Контакты" --- */
+        .contacts {
+            background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-pink) 100%);
+        }
+
+        .contacts-box {
+            background-color: #ffffff;
+            padding: 60px;
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+        }
+
+        .contacts-details h3 {
+            font-size: 2.2rem;
             margin-bottom: 20px;
+            letter-spacing: -0.5px;
         }
 
-        .info-item h4 {
-            color: var(--accent-blue);
-            margin-bottom: 5px;
+        .contacts-details p {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 1.05rem;
         }
 
-        /* Адаптивность */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 18px 24px;
+            background-color: var(--bg-light);
+            border-radius: 16px;
+            font-weight: 500;
+            border: 1px solid rgba(0,0,0,0.01);
+        }
+
+        .link-card:hover {
+            transform: translateX(8px);
+            background-color: var(--text-dark);
+            color: #ffffff;
+        }
+
+        .link-icon {
+            font-size: 1.4rem;
+        }
+
+        /* Форма */
+        .form-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .input-wrapper input, .input-wrapper textarea {
+            width: 100%;
+            padding: 16px 22px;
+            border: 1px solid #e2e8e2;
+            background-color: var(--bg-light);
+            border-radius: 14px;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        .input-wrapper input:focus, .input-wrapper textarea:focus {
+            border-color: var(--primary-color);
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(166, 191, 165, 0.15);
+        }
+
+        /* --- Подвал --- */
+        .footer {
+            background-color: var(--text-dark);
+            color: rgba(255,255,255,0.7);
+            padding: 35px 0;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        /* --- Адаптивность для мобильных устройств --- */
+        @media (max-width: 1024px) {
+            .about-wrapper {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .about-image-container::after {
+                display: none; /* Убираем декоративную рамку на мобильных для выравнивания */
+            }
+            .contacts-box {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                padding: 40px;
+            }
+            .hero-title {
+                font-size: 3.2rem;
+            }
+        }
+
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.5rem; }
-            .nav-links { display: none; } /* Для простоты примера скрыто на мобилках */
-            .price-card.featured { transform: scale(1); }
-            section { padding: 60px 0; }
+            section {
+                padding: 80px 0;
+            }
+            .section-title {
+                font-size: 2.1rem;
+            }
+            .hero-title {
+                font-size: 2.3rem;
+            }
+            .hero-description {
+                font-size: 1.1rem;
+            }
+            .info-blocks {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Навигация на мобильных */
+            .menu-toggle {
+                display: flex;
+                z-index: 1001;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: #ffffff;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.05);
+                transition: var(--transition);
+                z-index: 1000;
+            }
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            /* Переключение иконки бургера в крестик при активации */
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
+    <header class="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">Психолог Татьяна<span> Стельмашенко</span></a>
+            <button class="menu-toggle" id="mobile-menu-btn" aria-label="Открыть меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
             <nav>
-                <a href="#" class="logo">Можно Поговорить</a>
-                <ul class="nav-links">
-                    <li><a href="#about">Обо мне</a></li>
-                    <li><a href="#methods">Методы</a></li>
-                    <li><a href="#prices">Тарифы</a></li>
-                    <li><a href="#contacts">Контакты</a></li>
+                <ul class="nav-menu" id="nav-links">
+                    <li><a href="#about" class="nav-link">Обо мне</a></li>
+                    <li><a href="#methods" class="nav-link">Методы</a></li>
+                    <li><a href="#pricing" class="nav-link">Тарифы</a></li>
+                    <li><a href="#contacts" class="nav-link">Контакты</a></li>
                 </ul>
-                <a href="#contacts" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Записаться</a>
             </nav>
         </div>
     </header>
 
     <section class="hero">
+        <div class="hero-blob blob-1"></div>
         <div class="container">
             <div class="hero-content">
-                <h1>Обретите гармонию в бережном пространстве</h1>
-                <p>Профессиональная психологическая помощь онлайн. Помогу разобраться в себе, справиться с тревогой и найти внутренние ресурсы для жизни.</p>
-                <a href="#contacts" class="btn">Начать разговор</a>
+                <p class="hero-subtitle">Индивидуальные онлайн-консультации</p>
+                <h1 class="hero-title">Обретите внутреннюю опору и гармонию в жизни</h1>
+                <p class="hero-description">Профессиональная и бережная психологическая помощь без осуждения. Помогаю справиться с тревогами, кризисами и найти путь к себе в комфортном онлайн-формате.</p>
+                <a href="#contacts" class="btn">Записаться на консультацию</a>
             </div>
         </div>
     </section>
 
-    <section id="about">
+    <section id="about" class="about">
         <div class="container">
-            <h2>Обо мне</h2>
-            <div class="about-flex">
-                <div class="about-image">
-                    <img src="/images/girls_3.jpg" alt="Психолог">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-wrapper">
+                <div class="about-image-container">
+                    <img src="/images/photo.png" alt="Психолог Татьяна Стельмашенко" class="about-image">
                 </div>
                 <div class="about-text">
-                    <h3>Анна Павлова</h3>
-                    <p style="margin: 20px 0;">Практикующий психолог с 8-летним опытом. Магистр психологии, сертифицированный специалист в области когнитивно-поведенческой терапии.</p>
-                    <p>Верю, что каждый человек обладает силой изменить свою жизнь, и моя задача — поддержать вас на этом пути, создав безопасную атмосферу без осуждения.</p>
-                    <ul style="margin-top: 20px;">
-                        <li>✓ Более 1500 часов личной терапии с клиентами</li>
-                        <li>✓ Регулярная супервизия</li>
-                        <li>✓ Диплом государственного образца</li>
-                    </ul>
+                    <h3>Татьяна Стельмашенко</h3>
+                    <p>Приветствую! Я — дипломированный практикующий психолог. Моя цель — помочь вам разобраться в сложных жизненных ситуациях, пережить кризисы и наладить гармоничные отношения с собой и окружающим миром.</p>
+                    <p>В работе я гарантирую полную конфиденциальность, уважение к вашему опыту и безопасное пространство, где можно открыто говорить о любых чувствах.</p>
+                    
+                    <div class="info-blocks">
+                        <div class="info-card">
+                            <h4>Образование</h4>
+                            <p>Высшее психологическое образование, регулярное повышение квалификации.</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>Опыт работы</h4>
+                            <p>Более 5 лет успешной частной практики и глубокой работы с клиентами.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="methods" style="background-color: var(--primary-pink);">
+    <section id="methods" class="methods">
         <div class="container">
-            <h2>Методы работы</h2>
+            <h2 class="section-title">Методы работы</h2>
             <div class="methods-grid">
+                
                 <div class="method-card">
-                    <span class="method-icon">🧠</span>
-                    <h3>КПТ</h3>
-                    <p>Работа с мыслями и установками, которые мешают вам жить счастливо.</p>
+                    <div class="method-icon">🧠</div>
+                    <h3>Когнитивно-поведенческая терапия (КПТ)</h3>
+                    <p>Работа с деструктивными убеждениями, автоматическими мыслями и поведением. Помогает быстро и системно снизить уровень тревоги.</p>
                 </div>
+
                 <div class="method-card">
-                    <span class="method-icon">❤️</span>
-                    <h3>Гештальт</h3>
-                    <p>Фокус на чувствах и потребностях в моменте «здесь и сейчас».</p>
+                    <div class="method-icon">🌿</div>
+                    <h3>Гештальт-подход</h3>
+                    <p>Фокус на осознании своих истинных чувств, потребностей и проживании их в моменте «здесь и сейчас» для завершения застарелых обид.</p>
                 </div>
+
                 <div class="method-card">
-                    <span class="method-icon">🧘</span>
-                    <h3>Mindfulness</h3>
-                    <p>Практики осознанности для снижения стресса и контроля эмоций.</p>
+                    <div class="method-icon">🤍</div>
+                    <h3>Клиент-центрированная терапия</h3>
+                    <p>Бережный и принимающий подход, где во главе угла стоят ваши индивидуальные ценности, темп изменений и внутренние ресурсы.</p>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <section id="prices">
+    <section id="pricing" class="pricing">
         <div class="container">
-            <h2>Тарифы</h2>
+            <h2 class="section-title">Тарифы и стоимость</h2>
             <div class="pricing-grid">
+                
                 <div class="price-card">
-                    <h3>Разовая сессия</h3>
-                    <div class="price-val">3 500 ₽</div>
-                    <p>Знакомство, работа с конкретным точечным запросом.</p>
-                    <p style="margin: 20px 0;">50 минут</p>
-                    <a href="#contacts" class="btn">Выбрать</a>
+                    <div class="price-title">Знакомство</div>
+                    <div class="price-cost">1 500 ₽ <span>/ 30 мин</span></div>
+                    <ul class="price-features">
+                        <li>Первичная онлайн-встреча</li>
+                        <li>Знакомство и формулировка запроса</li>
+                        <li>Определение целей для терапии</li>
+                    </ul>
+                    <a href="#contacts" class="btn" style="background-color: var(--accent-blue);">Выбрать</a>
                 </div>
+
                 <div class="price-card featured">
-                    <h3>Терапия (4 сессии)</h3>
-                    <div class="price-val">12 000 ₽</div>
-                    <p>Глубокая проработка и устойчивые изменения.</p>
-                    <p style="margin: 20px 0;">4 х 50 минут</p>
-                    <a href="#contacts" class="btn">Выбрать</a>
+                    <div class="pop-badge">Рекомендую</div>
+                    <div class="price-title">Индивидуальная сессия</div>
+                    <div class="price-cost">3 500 ₽ <span>/ 50 мин</span></div>
+                    <ul class="price-features">
+                        <li>Полноценная глубокая сессия</li>
+                        <li>Видеосвязь (Zoom, Skype, WhatsApp)</li>
+                        <li>Домашние задания и практики</li>
+                    </ul>
+                    <a href="#contacts" class="btn">Записаться</a>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <section id="contacts">
+    <section id="contacts" class="contacts">
         <div class="container">
-            <h2>Контакты</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="info-item">
-                        <h4>Часы работы:</h4>
-                        <p>Пн — Пт: 10:00 - 20:00</p>
-                        <p>Сб: 11:00 - 16:00</p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Мессенджеры:</h4>
-                        <p>WhatsApp / Telegram: +7 (999) 000-00-00</p>
-                    </div>
-                    <div class="info-item">
-                        <h4>Email:</h4>
-                        <p>hello@mozhno-pogovorit.ru</p>
+            <div class="contacts-box">
+                
+                <div class="contacts-details">
+                    <h3>Связаться со мной</h3>
+                    <p>Вы можете написать мне напрямую в мессенджеры, позвонить или отправить заявку через форму, и я свяжусь с вами для согласования времени.</p>
+                    
+                    <div class="links-list">
+                        <a href="tel:+79255172651" class="link-card">
+                            <span class="link-icon">📞</span>
+                            <span>+7 (925) 517-26-51</span>
+                        </a>
+                        <a href="mailto:tanyastel@gmail.com" class="link-card">
+                            <span class="link-icon">✉️</span>
+                            <span>tanyastel@gmail.com</span>
+                        </a>
+                        <a href="https://t.me/TanyaStelmas" target="_blank" class="link-card">
+                            <span class="link-icon">✈️</span>
+                            <span>Telegram: @TanyaStelmas</span>
+                        </a>
+                        <a href="https://max.ru/u/f9LHodD0cOIbGVZGk1wlX3Lw-2J8WFZH2LLM9QXLAQ5Oi47WK8CY8ZwL4Qk" target="_blank" class="link-card">
+                            <span class="link-icon">💎</span>
+                            <span>Профиль на MAX.ru</span>
+                        </a>
                     </div>
                 </div>
-                <div class="contact-form" style="flex: 1; max-width: 400px;">
-                    <p>Оставьте заявку, и я свяжусь с вами в течение часа для подбора времени.</p>
-                    <form style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
-                        <input type="text" placeholder="Ваше имя" style="padding: 12px; border-radius: 8px; border: 1px solid #ccc;">
-                        <input type="tel" placeholder="Телефон" style="padding: 12px; border-radius: 8px; border: 1px solid #ccc;">
-                        <button type="submit" class="btn">Отправить</button>
+
+                <div class="form-panel">
+                    <form onsubmit="event.preventDefault(); alert('Спасибо за обращение! Татьяна ответит вам в ближайшее время.');" class="form-panel">
+                        <div class="input-wrapper">
+                            <input type="text" placeholder="Ваше имя" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <input type="tel" placeholder="Телефон или ник в Telegram" required>
+                        </div>
+                        <div class="input-wrapper">
+                            <textarea rows="4" placeholder="Кратко опишите проблему (по желанию)"></textarea>
+                        </div>
+                        <button type="submit" class="btn" style="width: 100%;">Отправить заявку</button>
                     </form>
                 </div>
+
             </div>
         </div>
     </section>
 
-    <footer style="text-align: center; padding: 40px; background: #2c3e50; color: white;">
-        <p>&copy; 2026 «Можно Поговорить». Все права защищены.</p>
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Психолог Татьяна Стельмашенко. Все права защищены.</p>
+        </div>
     </footer>
 
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const navLinks = document.getElementById('nav-links');
+        const menuLinks = document.querySelectorAll('.nav-link');
+
+        // Открытие/закрытие меню по клику на бургер
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Закрытие меню при клике на любую ссылку (для плавной прокрутки)
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
